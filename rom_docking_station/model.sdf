@@ -14,7 +14,7 @@
           <script> 
             <uri>model://rom_docking_station/materials/scripts</uri>
             <uri>model://rom_docking_station/materials/textures</uri>
-            <name>fae/Image</name>
+            <name>face/Image</name>
           </script>
         </material>
       </visual>

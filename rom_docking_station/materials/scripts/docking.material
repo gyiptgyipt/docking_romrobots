@@ -6,7 +6,7 @@ material face/Image
         {
             texture_unit
             {
-                docking_texture.png
+                texture docking_texture.png
             }
         }
     }
