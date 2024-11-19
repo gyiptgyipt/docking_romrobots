@@ -2,12 +2,20 @@
 <sdf version="1.6">
   <model name="rom_docking_station">
     <static>true</static>
+
+    <joint name="dock_joint" type="fixed">
+        <parent link="odom"/>
+        <child link="dock_frame"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+
     <link name="dock_frame">
-      <pose>0 0 0.5 0 0 0</pose>
+      <pose>0 0 0.3 0 0 0</pose>
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.5 0.5 0.5</size>
           </box>
         </geometry>
         <material>
@@ -20,12 +28,15 @@
       </visual>
     </link>
 
-<!-- Gazebo ROS TF Plugin to publish tf2 -->
-    <plugin name="ros2_tf_publisher" filename="libgazebo_ros_tf_publisher.so">
-      <robotNamespace>/rom_docking_station</robotNamespace>
-      <frameName>odom</frameName>
-      <childFrameName>dock_frame</childFrameName>
-      <pose>0 0 0 0 0 0</pose> <!-- Align dock_frame to cube_link -->
+
+    <plugin name="dock_pose_publisher" filename="libgazebo_ros_p3d.so">
+      <ros>
+        <namespace>dock</namespace>
+        <remapping>odom:=dock/pose</remapping>
+      </ros>
+      <body_name>dock_frame</body_name>
+      <frame_name>dock_frame</frame_name>
     </plugin>
 
+  </model>
 </sdf>

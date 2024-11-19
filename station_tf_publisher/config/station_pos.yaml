@@ -1,0 +1,12 @@
+transforms:
+  - frame_id: "odom"
+    child_frame_id: "dock_frame"
+    translation:
+      x: 0.1
+      y: 0.0
+      z: 0.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
