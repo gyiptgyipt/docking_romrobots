@@ -1,33 +1,26 @@
-// Include the IRremote library
-#include <IRremote.h>
+// Define the analog pins for the IR sensors
+const int irSensor1Pin = 4;
 
-const int RECV_PIN = 6; // Pin connected to the IR receiver module
-IRrecv irrecv(RECV_PIN);  // Create an IRrecv object
-decode_results results;   // Object to store the decoded IR signal
 
 void setup() {
-  Serial.begin(9600);  // Initialize serial communication
-  irrecv.enableIRIn(); // Start the receiver
-  Serial.println("IR Receiver ready...");
+  // Initialize IR sensor pins as input
+  pinMode(irSensor1Pin, INPUT);
+
+
+  // Start Serial communication for debugging
+  Serial.begin(9600);
+  Serial.println("Start");
 }
 
 void loop() {
-  if (irrecv.decode(&results)) {  // Check if we received an IR signal
-    long int decCode = results.value; // Get the decoded signal value
+  // Read analog values from the IR sensors
+  int irSensor1Value = analogRead(irSensor1Pin);
 
-    // Print the decoded signal value
-    //Serial.print("Received code: ");
-    //Serial.println(decCode, HEX);  // Print in hexadecimal format
+  // Print sensor values for debugging
+  Serial.print("IR Sensor : ");
+  Serial.println(irSensor1Value);
 
-    // You can add conditions to check for specific codes
-    if (decCode == 0xF4BA2988) {
-      Serial.println("Received A");
-    } else if (decCode == 0xE0E040BF) {
-      Serial.println("Received B");
-    } else if (decCode == 0x4004) {
-      Serial.println("Received C");
-    }
 
-    irrecv.resume();  // Prepare to receive the next signal
-  }
+  // Add a short delay to stabilize readings
+  delay(100);
 }
