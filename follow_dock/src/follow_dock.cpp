@@ -29,7 +29,7 @@ private:
         try
         {
             // Lookup the transform from base_link to target_frame
-            transformStamped = tf_buffer_->lookupTransform("base_link", "target_frame", tf2::TimePointZero);
+            transformStamped = tf_buffer_->lookupTransform("base_link", "dock_frame", tf2::TimePointZero);
 
             // Compute linear and angular velocity commands
             double dx = transformStamped.transform.translation.x;
@@ -43,7 +43,7 @@ private:
         }
         catch (const tf2::TransformException &ex)
         {
-            RCLCPP_WARN(this->get_logger(), "Could not transform target_frame to base_link: %s", ex.what());
+            RCLCPP_WARN(this->get_logger(), "Could not transform dock_frame to base_link: %s", ex.what());
         }
     }
 
