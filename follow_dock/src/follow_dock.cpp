@@ -19,6 +19,7 @@ public:
         timer_ = this->create_wall_timer(
             std::chrono::milliseconds(100),
             std::bind(&FrameFollower::followFrame, this));
+        
     }
 
 private:
