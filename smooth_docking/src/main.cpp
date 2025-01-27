@@ -44,13 +44,14 @@ void loop() {
     //     }
     // }
 
-    if (irSensorValue >= 0 && irSensorValue < 300 ){
-        motor.stopMotors();
+    if (analogRead(irSensorPin) >= 0 && analogRead(irSensorPin) < 300 ){
+        motor.moveBackward(80);
         right = 0;
         left = 0;
         delay(100);
+
     }
-    if (irSensorValue >= 300 && irSensorValue <= 1500 && right == 0 && left == 0){
+    if (analogRead(irSensorPin) >= 300 && analogRead(irSensorPin) <= 1500 && right == 0 && left == 0){
         motor.moveRight(80);
         delay(100);
         if(analogRead(irSensorPin) > 1500){
@@ -58,6 +59,27 @@ void loop() {
             right = 1;
         }
     }
+    if (analogRead(irSensorPin) >= 300 && analogRead(irSensorPin) <= 1500 && right == 1 && left == 0){
+        motor.moveLeft(80);
+        left = 1;
+        delay(100);
+    }
+    if(analogRead(irSensorPin) > 1500 && right == 1 && left == 1){
+            motor.stopMotors();
+            right = 0;
+            left = 0;
+            delay(100);
+        }
+    
+    // 
+    //  if (irSensorValue >= 300 && irSensorValue <= 1500 && right == 1 && left == 0){
+    //     motor.moveLeft(80);
+    //     delay(100);
+    //     if(analogRead(irSensorPin) > 1500){
+    //         motor.moveRight(80);
+    //         left = 1;
+    //     }
+    // }
     // if (irSensorValue > 500 && right == 1 && left == 0){
     //     motor.moveLeft(40);
     //     if(analogRead(irSensorPin) < 300){
